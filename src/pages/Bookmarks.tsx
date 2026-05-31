@@ -18,7 +18,7 @@ type BookmarkPost = {
     title: string;
     content: string;
     created_at: string;
-  }[];
+  };
 };
 
 function stripMarkdown(text: string) {
@@ -62,12 +62,10 @@ export default function Bookmarks() {
 
       if (error) {
         console.error(error);
-
         return;
       }
 
-      setBookmarks(data || []);
-    } catch (error) {
+setBookmarks(data as unknown as BookmarkPost[]);    } catch (error) {
       console.error(error);
     } finally {
       setLoading(false);
@@ -93,23 +91,28 @@ export default function Bookmarks() {
 
         <div className="grid gap-6 md:grid-cols-2">
           {bookmarks.map((bookmark) => (
-<Link
-  key={bookmark.post_id}
-  to={`/post/${bookmark.posts[0]?.id}`}
->              <Card>
-                <p className="text-sm text-zinc-500">Saved Article</p>
+            <Link
+              key={bookmark.post_id}
+              to={`/post/${bookmark.post_id}`}
+            >
+              <Card>
+                <p className="text-sm text-zinc-500">
+                  Saved Article
+                </p>
 
                 <h2 className="mt-4 text-3xl font-light leading-tight">
-{bookmark.posts[0]?.title}
+                  {bookmark.posts.title}
                 </h2>
 
                 <p className="mt-6 line-clamp-3 leading-relaxed text-zinc-600 dark:text-zinc-400">
-{stripMarkdown(bookmark.posts[0]?.content || "")}                </p>
+                  {stripMarkdown(bookmark.posts.content)}
+                </p>
 
                 <p className="mt-8 text-sm text-zinc-500">
-{new Date(
-  bookmark.posts[0]?.created_at || ""
-).toLocaleDateString()}                </p>
+                  {new Date(
+                    bookmark.posts.created_at
+                  ).toLocaleDateString()}
+                </p>
               </Card>
             </Link>
           ))}
