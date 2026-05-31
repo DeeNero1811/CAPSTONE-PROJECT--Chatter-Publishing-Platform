@@ -30,24 +30,72 @@ export function AuthProvider({
 
   const [loading, setLoading] = useState(true)
 
+  async function ensureProfile(user: User) {
+    const { data: profile } = await supabase
+      .from("profiles")
+      .select("id")
+      .eq("id", user.id)
+      .maybeSingle()
+
+    if (!profile) {
+      await supabase.from("profiles").insert({
+        id: user.id,
+
+        full_name:
+          user.user_metadata?.full_name ||
+          user.user_metadata?.name ||
+          "",
+
+        username:
+          user.email?.split("@")[0].toLowerCase() ||
+          `user_${user.id.slice(0, 8)}`,
+
+        avatar_url:
+          user.user_metadata?.avatar_url ||
+          user.user_metadata?.picture ||
+          "",
+      })
+    }
+  }
+
   useEffect(() => {
-    supabase.auth.getSession().then(({ data }) => {
-      setUser(data.session?.user ?? null)
+    async function initializeAuth() {
+      const {
+        data: { session },
+      } = await supabase.auth.getSession()
+
+      const currentUser = session?.user ?? null
+
+      setUser(currentUser)
+
+      if (currentUser) {
+        await ensureProfile(currentUser)
+      }
 
       setLoading(false)
-    })
+    }
+
+    initializeAuth()
 
     const {
       data: { subscription },
     } = supabase.auth.onAuthStateChange(
-      (_event, session) => {
-        setUser(session?.user ?? null)
+      async (_event, session) => {
+        const currentUser =
+          session?.user ?? null
+
+        setUser(currentUser)
+
+        if (currentUser) {
+          await ensureProfile(currentUser)
+        }
 
         setLoading(false)
       }
     )
 
-    return () => subscription.unsubscribe()
+    return () =>
+      subscription.unsubscribe()
   }, [])
 
   return (
@@ -62,4 +110,5 @@ export function AuthProvider({
   )
 }
 
-export const useAuth = () => useContext(AuthContext)
+export const useAuth = () =>
+  useContext(AuthContext)

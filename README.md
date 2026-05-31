@@ -6,8 +6,7 @@ Chatter is a modern publishing platform built for writers and readers who value 
 
 Add your deployed URL here:
 
-https://your-live-demo-url.com
-
+https://capstone-project-chatter-publishing.vercel.app/
 ---
 
 ## Features
