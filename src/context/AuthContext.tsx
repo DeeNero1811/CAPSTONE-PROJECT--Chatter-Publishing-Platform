@@ -68,9 +68,9 @@ export function AuthProvider({
 
       setUser(currentUser)
 
-      if (currentUser) {
-        await ensureProfile(currentUser)
-      }
+    if (currentUser) {
+  ensureProfile(currentUser).catch(console.error)
+}
 
       setLoading(false)
     }
@@ -86,11 +86,11 @@ export function AuthProvider({
 
         setUser(currentUser)
 
-        if (currentUser) {
-          await ensureProfile(currentUser)
-        }
+      if (currentUser) {
+  ensureProfile(currentUser).catch(console.error)
+}
 
-        setLoading(false)
+setLoading(false)
       }
     )
 
