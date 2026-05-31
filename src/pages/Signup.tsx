@@ -43,8 +43,9 @@ export default function Signup() {
         });
       }
 
-      window.location.href = "/explore";
-    } catch (error) {
+alert("Account created successfully. Please login.");
+
+window.location.href = "/login";    } catch (error) {
       console.error(error);
     } finally {
       setLoading(false);
