@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 import { useNavigate } from "react-router-dom";
 
@@ -6,8 +6,18 @@ import MainLayout from "../layouts/MainLayout";
 
 import { supabase } from "../lib/supabase";
 
+import { useAuth } from "../context/AuthContext";
+
 export default function Login() {
   const navigate = useNavigate();
+
+  const { user, loading: authLoading } = useAuth();
+
+  useEffect(() => {
+    if (!authLoading && user) {
+      navigate("/");
+    }
+  }, [user, authLoading, navigate]);
 
   const [email, setEmail] = useState("");
 
@@ -17,6 +27,9 @@ export default function Login() {
 
   const [oauthLoading, setOauthLoading] = useState(false);
 
+  if (authLoading) {
+    return null;
+  }
   async function handleLogin() {
     try {
       setLoading(true);
