@@ -4,9 +4,7 @@ Chatter is a modern publishing platform built for writers and readers who value 
 
 ## Live Demo
 
-Add your deployed URL here:
-
-https://capstone-project-chatter-publishing.vercel.app/
+https://capstone-project-chatter-publishing.vercel.app
 ---
 
 ## Features
@@ -130,7 +128,6 @@ src/
 
 ## Installation
 
-Clone the repository:
 
 ```bash
 git clone https://github.com/DeeNero1811/CAPSTONE-PROJECT--Chatter-Publishing-Platform.git
