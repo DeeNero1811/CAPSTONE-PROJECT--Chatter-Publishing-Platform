@@ -167,13 +167,14 @@ export default function Navbar() {
 
         {/* DESKTOP NAV */}
         <div
-          className="
-            hidden items-center gap-8
-            text-sm text-zinc-600
-            dark:text-zinc-300
-            lg:flex
-          "
-        >
+  className="
+    hidden items-center gap-8
+    text-sm font-semibold
+    text-zinc-600
+    dark:text-zinc-300
+    lg:flex
+  "
+>
           <NavLink
             to="/explore"
             className={({ isActive }) =>
@@ -231,8 +232,7 @@ export default function Navbar() {
   flex h-11 items-center
   gap-2 rounded-full
   bg-black px-5
-  text-sm font-medium
-  text-white
+text-sm font-semibold  text-white
   transition-all duration-300
   hover:bg-zinc-800
   dark:bg-white
@@ -398,18 +398,19 @@ export default function Navbar() {
               </NavLink>
 
               <NavLink
-                to="/signup"
-                className="
-                  rounded-full
-                  bg-gradient-to-r
-                  from-indigo-600
-                  to-violet-600
-                  px-5 py-2
-                  text-white
-                  transition
-                  hover:opacity-90
-                "
-              >
+  to="/signup"
+  className="
+    rounded-full
+    bg-gradient-to-r
+    from-indigo-600
+    to-violet-600
+    px-5 py-2
+    font-semibold
+    !text-white
+    transition
+    hover:opacity-90
+  "
+>
                 Create Account
               </NavLink>
             </>
@@ -422,9 +423,10 @@ export default function Navbar() {
         {mobileMenuOpen && (
           <div
             className="
-              absolute left-0 top-16
-              flex w-full
-              flex-col gap-4
+  absolute left-0 top-16
+  flex w-full
+  flex-col gap-4
+  font-semibold
               border-b
               border-zinc-200
               bg-white px-6 py-6

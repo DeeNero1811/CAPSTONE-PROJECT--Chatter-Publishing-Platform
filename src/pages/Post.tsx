@@ -623,15 +623,18 @@ const { error } = await supabase      .from("comments")
           </div>
         </div>
         <div
-          className="
-            prose prose-lg prose-zinc
-            max-w-none leading-relaxed
-            dark:prose-invert
-          "
-          data-color-mode="light"
-        >
-          <MDEditor.Markdown source={post.content} />
-        </div>
+  className="
+    prose prose-lg prose-zinc
+    max-w-none leading-relaxed
+    prose-img:my-10
+    prose-img:rounded-2xl
+    prose-img:w-full
+    dark:prose-invert
+  "
+  data-color-mode="light"
+>
+  <MDEditor.Markdown source={post.content} />
+</div>
 
         <section className="mt-24 border-t border-zinc-200 pt-14 dark:border-zinc-800">
           <div className="mb-10">
